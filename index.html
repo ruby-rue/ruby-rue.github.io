@@ -15,14 +15,18 @@
             font-family: Arial, sans-serif;
             line-height: 1.6;
             padding: 20px;
-            background-color: #f4f4f4;
-            position: relative; /* Add this line */
-            overflow: hidden; /* Add this line */
+            background-color: #000;
+            color: white;
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .gallery {
@@ -46,12 +50,13 @@
         }
 
         .form-container {
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.1);
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(255,255,255,0.1);
             max-width: 500px;
             margin: 0 auto;
+            backdrop-filter: blur(5px);
         }
 
         .form-group {
@@ -62,51 +67,8 @@
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
+            color: white;
         }
-        .dot {
-    height: 15px;
-    width: 15px;
-    margin: 0 2px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-    transition: background-color 0.6s ease;
-}
-
-.active {
-    background-color: #717171;
-}
-
-#shooting-stars {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    overflow: hidden;
-}
-
-.star {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: white;
-    box-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white;
-    animation: shoot 2s linear infinite;
-}
-
-@keyframes shoot {
-    0% {
-        transform: translateX(0) translateY(0);
-        opacity: 1;
-    }
-    100% {
-        transform: translateX(100vw) translateY(100vh);
-        opacity: 0;
-    }
-}
-
 
         input {
             width: 100%;
@@ -114,6 +76,7 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             font-size: 16px;
+            background: rgba(255, 255, 255, 0.9);
         }
 
         button {
@@ -132,16 +95,62 @@
 
         .success-message {
             display: none;
-            background-color: #d4edda;
+            background-color: rgba(212, 237, 218, 0.9);
             color: #155724;
             padding: 10px;
             border-radius: 4px;
             margin-top: 20px;
         }
+
+        #shooting-stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            box-shadow: 0 0 10px white;
+            animation: shoot 2s linear forwards;
+        }
+
+        .star::before {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 1px;
+            background: linear-gradient(90deg, white, transparent);
+            transform: translateX(-100%) rotate(45deg);
+        }
+
+        @keyframes shoot {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(200vh, 200vh);
+                opacity: 0;
+            }
+        }
+
+        h1, h2 {
+            color: white;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
     </style>
 </head>
 <body>
+    <div id="shooting-stars"></div>
     <div class="container">
+        <!-- Rest of the HTML remains the same -->
         <h1>Car Gallery</h1>
         <div class="gallery">
             <img src="https://www.rolls-roycemotorcars.com/content/dam/rrmc/marketUK/rollsroycemotorcars_com/boutique/starlight-headlining/component-assets/accessories-product-starlight-headliner-carousel-wraith-starlight-detail.jpg/jcr:content/renditions/cq5dam.web.1920.webp" alt="Car 1">
@@ -173,7 +182,6 @@
             <div id="successMessage" class="success-message">
                 Thank you for your submission!
             </div>
-            <div id="shooting-stars"></div>
         </div>
     </div>
 
@@ -181,47 +189,53 @@
         document.getElementById('carForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Get form values
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const carModel = document.getElementById('carModel').value;
             
-            // In a real application, you would send this data to a server
             console.log('Form submitted:', { name, email, carModel });
             
-            // Show success message
             document.getElementById('successMessage').style.display = 'block';
             
-            // Reset form
             this.reset();
             
-            // Hide success message after 3 seconds
             setTimeout(() => {
                 document.getElementById('successMessage').style.display = 'none';
             }, 3000);
         });
 
-        // Add click event to gallery images
         document.querySelectorAll('.gallery img').forEach(img => {
             img.addEventListener('click', function() {
                 alert(`You clicked ${this.alt}`);
-                // In a real application, you could show a modal with larger image
             });
         });
-        function createStar() {
-    const shootingStars = document.getElementById('shooting-stars');
-    const star = document.createElement('div');
-    star.className = 'star';
-    star.style.top = Math.random() * window.innerHeight + 'px';
-    star.style.left = Math.random() * window.innerWidth + 'px';
-    shootingStars.appendChild(star);
-    
-    setTimeout(() => {
-        star.remove();
-    }, 2000);
-}
 
-setInterval(createStar, 500);
+        function createStar() {
+            const star = document.createElement('div');
+            star.className = 'star';
+            
+            // Random starting position across the full width and height
+            star.style.left = `${Math.random() * window.innerWidth}px`;
+            star.style.top = `${Math.random() * window.innerHeight}px`;
+            
+            document.getElementById('shooting-stars').appendChild(star);
+            
+            // Remove the star after animation completes
+            setTimeout(() => {
+                star.remove();
+            }, 2000);
+        }
+
+        // Create stars at random intervals
+        function createStarsRandomly() {
+            const numberOfStars = Math.floor(Math.random() * 3) + 1; // Create 1-3 stars at once
+            for (let i = 0; i < numberOfStars; i++) {
+                createStar();
+            }
+            setTimeout(createStarsRandomly, Math.random() * 200 + 100); // Random delay between 100-300ms
+        }
+
+        createStarsRandomly();
     </script>
 </body>
 </html>
