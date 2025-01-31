@@ -16,6 +16,8 @@
             line-height: 1.6;
             padding: 20px;
             background-color: #f4f4f4;
+            position: relative; /* Add this line */
+            overflow: hidden; /* Add this line */
         }
 
         .container {
@@ -87,20 +89,21 @@
 
 .star {
     position: absolute;
-    width: 5px;
-    height: 5px;
+    width: 2px;
+    height: 2px;
     background: white;
-    border-radius: 50%;
-    box-shadow: 0 0 8px white;
-    animation: star-move 3s linear infinite;
+    box-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white;
+    animation: shoot 2s linear infinite;
 }
 
-@keyframes star-move {
-    from {
+@keyframes shoot {
+    0% {
         transform: translateX(0) translateY(0);
+        opacity: 1;
     }
-    to {
-        transform: translateX(-100vw) translateY(-100vh);
+    100% {
+        transform: translateX(100vw) translateY(100vh);
+        opacity: 0;
     }
 }
 
