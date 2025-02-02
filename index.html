@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Gallery & Contact Form</title>
+    <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js"></script>
+
     <style>
         * {
             box-sizing: border-box;
@@ -173,6 +176,53 @@
     </style>
 </head>
 <body>
+    <form id="customerForm">
+        <input type="text" id="name" placeholder="Enter your name" required>
+        <input type="email" id="email" placeholder="Enter your email" required>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="status"></p>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyD6J41aVpI8BpvEbgDQefAizWSO6BDU6k4",
+            authDomain: "stargazin-98.firebaseapp.com",
+            projectId: "stargazin-98",
+            storageBucket: "stargazin-98.firebasestorage.app",
+            messagingSenderId: "135928909367",
+            appId: "1:135928909367:web:208efb59bc1d0e1a8639b2",
+            measurementId: "G-4W5C0LHN80"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+         // Handle Form Submission
+        document.getElementById("customerForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+
+            db.collection("customers").add({
+                name: name,
+                email: email,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(() => {
+                document.getElementById("status").innerText = "Data saved successfully!";
+            }).catch(error => {
+                document.getElementById("status").innerText = "Error: " + error;
+            });
+        });
+    </script>
     <div id="shooting-stars"></div>
     <div class="container">
         <div class="header">
