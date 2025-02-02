@@ -235,28 +235,48 @@
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-analytics.js";
         import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
 
         // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
         const firebaseConfig = {
-            apiKey: "AIzaSyD6J41aVpI8BpvEbgDQefAizWSO6BDU6k4",
-            authDomain: "stargazin-98.firebaseapp.com",
-            projectId: "stargazin-98",
-            storageBucket: "stargazin-98.firebasestorage.app",
-            messagingSenderId: "135928909367",
-            appId: "1:135928909367:web:208efb59bc1d0e1a8639b2",
-            measurementId: "G-4W5C0LHN80"
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID",
+            measurementId: "YOUR_MEASUREMENT_ID"
         };
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
         const db = getFirestore(app);
-        
+
+        // Form submission
+        document.getElementById('carForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const currentcar = document.getElementById('currentcar').value;
+            const dreamcar = document.getElementById('dreamcar').value;
+
+            try {
+                await addDoc(collection(db, "carSubmissions"), {
+                    name: name,
+                    email: email,
+                    currentcar: currentcar,
+                    dreamcar: dreamcar,
+                    timestamp: serverTimestamp()
+                });
+                console.log('Form submitted:', { name, email, currentcar, dreamcar });
+                document.getElementById('successMessage').style.display = 'block';
+                this.reset();
+                setTimeout(() => {
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 3000);
+            } catch (error) {
+                console.error("Error adding document: ", error);
+            }
         });
     </script>
     <div id="shooting-stars"></div>
@@ -399,18 +419,30 @@
         setInterval(() => showSlide(currentSlide + 1), 5000);
 
         // Form submission
-        document.getElementById('carForm').addEventListener('submit', function(e) {
+        document.getElementById('carForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const currentcar = document.getElementById('currentcar').value;
             const dreamcar = document.getElementById('dreamcar').value;
-            console.log('Form submitted:', { name, email, currentcar, dreamcar });
-            document.getElementById('successMessage').style.display = 'block';
-            this.reset();
-            setTimeout(() => {
-                document.getElementById('successMessage').style.display = 'none';
-            }, 3000);
+
+            try {
+                await addDoc(collection(db, "carSubmissions"), {
+                    name: name,
+                    email: email,
+                    currentcar: currentcar,
+                    dreamcar: dreamcar,
+                    timestamp: serverTimestamp()
+                });
+                console.log('Form submitted:', { name, email, currentcar, dreamcar });
+                document.getElementById('successMessage').style.display = 'block';
+                this.reset();
+                setTimeout(() => {
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 3000);
+            } catch (error) {
+                console.error("Error adding document: ", error);
+            }
         });
 
         // Shooting stars
