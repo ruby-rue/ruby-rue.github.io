@@ -42,7 +42,7 @@
         .logo {
         width: 100px;
         height: 100px;
-        background-image: url('https://github.com/ruby-rue/ruby-rue.github.io/blob/main/assetes/2af9b6a1-7603-40a0-844b-aadc38ad553b.jpg?raw=true'); /* Add this line */
+        background-image: url('https://github.com/ruby-rue/ruby-rue.github.io/blob/main/2af9b6a1-7603-40a0-844b-aadc38ad553b.jpg?raw=true'); /* Add this line */
         background-size: cover; /* Ensure the image covers the entire element */
         background-position: center; /* Center the image */
         border-radius: 50%;
@@ -50,6 +50,26 @@
         align-items: center;
         justify-content: center;
     }
+    .title-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .main-title {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .introduction {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-size: 18px;
+            line-height: 1.8;
+            text-align: center;
+            color: #ccc;
+        }
 
         .slideshow-container {
             max-width: 1000px;
@@ -123,6 +143,41 @@
             max-width: 500px;
             margin: 20px auto;
             backdrop-filter: blur(5px);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #444;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: white;
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: Copperplate, fantasy;
+            font-weight: bold;
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            color: #4CAF50;
+            margin-top: 10px;
         }
 
         .footer {
@@ -207,9 +262,80 @@
     <div id="shooting-stars"></div>
     <div class="container">
         <div class="header">
-            <div class="logo">RR</div>
+            <div class="logo"></div>
         </div>
         
+        <div class="title-section">
+            <h1 class="main-title">Stargaz-in Starlight</h1>
+            <div class="introduction">
+                Welcome to an extraordinary journey through luxury and craftsmanship. Our Starlight Headliner is a 
+                masterpiece of engineering and artistry, featuring thousands of hand-placed fiber optic lights that 
+                transform your vehicle's interior into a mesmerizing constellation. Experience the magic of a starlit 
+                sky, wherever your journey takes you.
+            </div>
+        </div>
+        
+        <div class="slideshow-container">
+            <button class="prev">❮</button>
+            <button class="next">❯</button>
+            
+            <div class="slide active">
+                <img src="https://github.com/ruby-rue/ruby-rue.github.io/blob/main/slideshow/3bc93617-1484-4844-a264-43cfde27af9b.jpg?raw=true" alt="Car 1">
+            </div>
+            <div class="slide">
+                <img src="https://github.com/ruby-rue/ruby-rue.github.io/blob/main/slideshow/036cc497-2602-42b8-bf7d-b25f6d22d513.jpg?raw=true" alt="Car 1">
+            </div>
+            <div class="slide">
+                <img src="https://github.com/ruby-rue/ruby-rue.github.io/blob/main/slideshow/147654d0-2e16-47bd-bc88-ece17adc0dbf.jpg?raw=true" alt="Car 1">
+            </div>
+            <div class="slide">
+                <img src="https://github.com/ruby-rue/ruby-rue.github.io/blob/main/slideshow/30bf996e-1700-4ff0-a6f9-00c0697b32cc.jpg?raw=true" alt="Car 1">
+            </div>
+            <div class="slide">
+                <img src="https://github.com/ruby-rue/ruby-rue.github.io/blob/main/slideshow/53359113-718e-4b6d-8013-bf7d71cbd04c.jpg?raw=true" alt="Car 1">
+            </div>
+            <div class="slide">
+                <img src="https://github.com/ruby-rue/ruby-rue.github.io/blob/main/slideshow/61f7a475-8a3d-45c5-a256-d3b8c0c0cdc4.jpg?raw=true" alt="Car 1">
+            </div>
+            <div class="slide">
+                <img src="https://github.com/ruby-rue/ruby-rue.github.io/blob/main/slideshow/62644463-8c32-4629-b1f7-07bf68f6b27e.jpg?raw=true" alt="Car 1">
+            </div>
+            <div class="slide">
+                <img src="https://github.com/ruby-rue/ruby-rue.github.io/blob/main/slideshow/73328ac8-7835-4904-935e-68a8c33da135.jpg?raw=true" alt="Car 1">
+            </div>
+            <div class="slide">
+                <img src="https://github.com/ruby-rue/ruby-rue.github.io/blob/main/slideshow/b02f9046-ef81-451f-bebe-9b1e339cd865.jpg?raw=true" alt="Car 1">
+            </div>
+            <div class="slide">
+                <img src="https://github.com/ruby-rue/ruby-rue.github.io/blob/main/slideshow/bce47cdc-9e1f-43d3-9205-42caafa52c59.jpg?raw=true" alt="Car 1">
+            </div>
+            <div class="slide">
+                <img src="https://github.com/ruby-rue/ruby-rue.github.io/blob/main/slideshow/bd305111-5dd2-4097-bba8-910fe3142ab4.jpg?raw=true" alt="Car 1">
+            </div>
+            <div class="slide">
+                <img src="https://github.com/ruby-rue/ruby-rue.github.io/blob/main/slideshow/e3e96d04-bbda-4ac3-992c-9b3b87b8ba9e.jpg?raw=true" alt="Car 1">
+            </div>
+            <div class="slide">
+                <img src="https://github.com/ruby-rue/ruby-rue.github.io/blob/main/slideshow/e3f34d3a-c2df-42b0-a260-7f4940f30d33.jpg?raw=true" alt="Car 1">
+            </div>
+
+            <div class="dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+
         <div class="form-container">
             <h2>Contact Information</h2>
             <form id="carForm">
@@ -233,7 +359,6 @@
                     <input type="text" id="dreamcar" name="dreamcar" required>
                 </div>
 
-
                 <button type="submit">Submit</button>
             </form>
             <div id="successMessage" class="success-message">
@@ -241,35 +366,11 @@
             </div>
         </div>
 
-        <div class="slideshow-container">
-            <button class="prev">❮</button>
-            <button class="next">❯</button>
-            
-            <div class="slide active">
-                <img src="https://www.rolls-roycemotorcars.com/content/dam/rrmc/marketUK/rollsroycemotorcars_com/boutique/starlight-headlining/component-assets/accessories-product-starlight-headliner-carousel-wraith-starlight-detail.jpg/jcr:content/renditions/cq5dam.web.1920.webp" alt="Car 1">
-            </div>
-            <div class="slide">
-                <img src="https://www.rolls-roycemotorcars.com/content/dam/rrmc/marketUK/rollsroycemotorcars_com/boutique/starlight-headlining/component-assets/accessories-product-starlight-headliner-carousel-wraith-headliner.jpg/jcr:content/renditions/cq5dam.web.1920.webp" alt="Car 2">
-            </div>
-            <div class="slide">
-                <img src="https://www.rolls-roycemotorcars.com/content/dam/rrmc/marketUK/rollsroycemotorcars_com/boutique/starlight-headlining/component-assets/accessories-product-starlight-headliner-carousel-curtained-phantom-headliner.jpg/jcr:content/renditions/cq5dam.web.1920.webp" alt="Car 3">
-            </div>
-            <div class="slide">
-                <img src="https://www.rolls-roycemotorcars.com/content/dam/rrmc/marketUK/rollsroycemotorcars_com/boutique/starlight-headlining/component-assets/accessories-product-starlight-headliner-carousel-curtained-phantom-headliner.jpg/jcr:content/renditions/cq5dam.web.1920.webp" alt="Car 4">
-            </div>
-
-            <div class="dots">
-                <span class="dot active"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-            </div>
-        </div>
-
         <div class="footer">
             <p>Contact Us:</p>
-            <p>Email: <a href="mailto:info@luxurycars.com">info@luxurycars.com</a></p>
-            <p>Phone: +1 (555) 123-4567</p>
+            <p>Email: <a href="mailto:khalilben@stargazin.pro">khalilben@stargazin.pro</a></p>
+            <p>Instagram: <a href="https://www.instagram.com/stargaz.in/reels/?locale=zh_CN&hl=af" target="_blank">@stargaz.in</a></p>
+            <p>Phone: +212 697-353985</p>
         </div>
     </div>
 
