@@ -176,17 +176,13 @@
     </style>
 </head>
 <body>
-    <form id="customerForm">
-        <input type="text" id="name" placeholder="Enter your name" required>
-        <input type="email" id="email" placeholder="Enter your email" required>
-        <button type="submit">Submit</button>
-    </form>
-    <p id="status"></p>
+    
 
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-analytics.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -205,22 +201,8 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
-         // Handle Form Submission
-        document.getElementById("customerForm").addEventListener("submit", function(e) {
-            e.preventDefault();
-
-            let name = document.getElementById("name").value;
-            let email = document.getElementById("email").value;
-
-            db.collection("customers").add({
-                name: name,
-                email: email,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            }).then(() => {
-                document.getElementById("status").innerText = "Data saved successfully!";
-            }).catch(error => {
-                document.getElementById("status").innerText = "Error: " + error;
-            });
+        const db = getFirestore(app);
+        
         });
     </script>
     <div id="shooting-stars"></div>
@@ -243,9 +225,15 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="carModel">Preferred Car Model:</label>
-                    <input type="text" id="carModel" name="carModel" required>
+                    <label for="currentcar">Current Car Model:</label>
+                    <input type="text" id="currentcar" name="currentcar" required>
                 </div>
+
+                <div class="form-group">
+                    <label for="dreamcar">Dream Car Model:</label>
+                    <input type="text" id="dreamcar" name="dreamcar" required>
+                </div>
+
 
                 <button type="submit">Submit</button>
             </form>
@@ -315,8 +303,9 @@
             e.preventDefault();
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
-            const carModel = document.getElementById('carModel').value;
-            console.log('Form submitted:', { name, email, carModel });
+            const currentcar = document.getElementById('currentcar').value;
+            const dreamcar = document.getElementById('dreamcar').value;
+            console.log('Form submitted:', { name, email, currentcar, dreamcar });
             document.getElementById('successMessage').style.display = 'block';
             this.reset();
             setTimeout(() => {
