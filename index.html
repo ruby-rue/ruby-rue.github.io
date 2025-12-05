@@ -3,467 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Gallery & Contact Form</title>
-    <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js"></script>
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Copperplate, fantasy;
-            line-height: 1.6;
-            padding: 20px;
-            background-color: #000;
-            color: white;
-            position: relative;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .header {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .logo {
-        width: 100px;
-        height: 100px;
-        background-image: url('https://github.com/ruby-rue/ruby-rue.github.io/blob/main/2af9b6a1-7603-40a0-844b-aadc38ad553b.jpg?raw=true'); /* Add this line */
-        background-size: cover; /* Ensure the image covers the entire element */
-        background-position: center; /* Center the image */
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .title-section {
-            text-align: center;
-            margin: 40px 0;
-        }
-
-        .main-title {
-            font-size: 48px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .introduction {
-            max-width: 800px;
-            margin: 0 auto 40px;
-            font-size: 18px;
-            line-height: 1.8;
-            text-align: center;
-            color: #ccc;
-        }
-
-        .slideshow-container {
-            max-width: 1000px;
-            position: relative;
-            margin: 30px auto;
-        }
-
-        .slide {
-            display: none;
-            width: 100%;
-        }
-
-        .slide.active {
-            display: block;
-        }
-
-        .slide img {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        .prev, .next {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            padding: 16px;
-            color: white;
-            font-weight: bold;
-            font-size: 20px;
-            background: rgba(0,0,0,0.5);
-            border: none;
-            border-radius: 4px;
-            z-index: 2;
-        }
-
-        .next {
-            right: 0;
-        }
-
-        .prev {
-            left: 0;
-        }
-
-        .dots {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .dot {
-            width: 12px;
-            height: 12px;
-            background-color: #bbb;
-            border-radius: 50%;
-            display: inline-block;
-            margin: 0 5px;
-            cursor: pointer;
-        }
-
-        .dot.active {
-            background-color: white;
-        }
-
-        .form-container {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(255,255,255,0.1);
-            max-width: 500px;
-            margin: 20px auto;
-            backdrop-filter: blur(5px);
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #444;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            border-radius: 4px;
-        }
-
-        button {
-            background-color: white;
-            color: black;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: Copperplate, fantasy;
-            font-weight: bold;
-        }
-
-        .success-message {
-            display: none;
-            text-align: center;
-            color: #4CAF50;
-            margin-top: 10px;
-        }
-
-        .footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            padding: 20px;
-            color: white;
-            z-index: 1;
-        }
-
-        .footer a {
-            color: white;
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Rest of your existing styles remain the same */
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: white;
-            box-shadow: 0 0 10px white;
-            animation: shoot 2s linear forwards;
-        }
-
-        .star::before {
-            content: '';
-            position: absolute;
-            width: 50px;
-            height: 1px;
-            background: linear-gradient(90deg, white, transparent);
-            transform: translateX(-100%) rotate(45deg);
-        }
-
-        @keyframes shoot {
-            0% {
-                transform: translate(0, 0);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(200vh, 200vh);
-                opacity: 0;
-            }
-        }
-    </style>
+    <title>Stargazin - Explore the Night Sky</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    
+    <!-- Animated starry background -->
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
 
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">✨ Stargazin</div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID",
-            measurementId: "YOUR_MEASUREMENT_ID"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        // Form submission
-        document.getElementById('carForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const currentcar = document.getElementById('currentcar').value;
-            const dreamcar = document.getElementById('dreamcar').value;
-
-            try {
-                await addDoc(collection(db, "carSubmissions"), {
-                    name: name,
-                    email: email,
-                    currentcar: currentcar,
-                    dreamcar: dreamcar,
-                    timestamp: serverTimestamp()
-                });
-                console.log('Form submitted:', { name, email, currentcar, dreamcar });
-                document.getElementById('successMessage').style.display = 'block';
-                this.reset();
-                setTimeout(() => {
-                    document.getElementById('successMessage').style.display = 'none';
-                }, 3000);
-            } catch (error) {
-                console.error("Error adding document: ", error);
-            }
-        });
-    </script>
-    <div id="shooting-stars"></div>
-    <div class="container">
-        <div class="header">
-            <div class="logo"></div>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Stargazin</h1>
+            <p>Discover the beauty of the cosmos</p>
+            <a href="#gallery" class="cta-button">Explore Our Gallery</a>
         </div>
-        
-        <div class="title-section">
-            <h1 class="main-title">Stargazin Starlight</h1>
-            <div class="introduction">
-                Welcome to an extraordinary journey through luxury and craftsmanship. Our Starlight Headliner is a 
-                masterpiece of engineering and artistry, featuring thousands of hand-placed fiber optic lights that 
-                transform your vehicle's interior into a mesmerizing constellation. Experience the magic of a starlit 
-                sky, wherever your journey takes you.
-            </div>
-        </div>
-        
-        <div class="slideshow-container">
-            <button class="prev">❮</button>
-            <button class="next">❯</button>
-            
-            <div class="slide active">
-                <img src="https://github.com/ruby-rue/ruby-rue.github.io/blob/main/slideshow/3bc93617-1484-4844-a264-43cfde27af9b.jpg?raw=true" alt="Car 1">
-            </div>
-            <div class="slide">
-                <img src="https://github.com/ruby-rue/ruby-rue.github.io/blob/main/slideshow/036cc497-2602-42b8-bf7d-b25f6d22d513.jpg?raw=true" alt="Car 1">
-            </div>
-            <div class="slide">
-                <img src="https://github.com/ruby-rue/ruby-rue.github.io/blob/main/slideshow/147654d0-2e16-47bd-bc88-ece17adc0dbf.jpg?raw=true" alt="Car 1">
-            </div>
-            <div class="slide">
-                <img src="https://github.com/ruby-rue/ruby-rue.github.io/blob/main/slideshow/30bf996e-1700-4ff0-a6f9-00c0697b32cc.jpg?raw=true" alt="Car 1">
-            </div>
-            <div class="slide">
-                <img src="https://github.com/ruby-rue/ruby-rue.github.io/blob/main/slideshow/53359113-718e-4b6d-8013-bf7d71cbd04c.jpg?raw=true" alt="Car 1">
-            </div>
-            <div class="slide">
-                <img src="https://github.com/ruby-rue/ruby-rue.github.io/blob/main/slideshow/61f7a475-8a3d-45c5-a256-d3b8c0c0cdc4.jpg?raw=true" alt="Car 1">
-            </div>
-            <div class="slide">
-                <img src="https://github.com/ruby-rue/ruby-rue.github.io/blob/main/slideshow/62644463-8c32-4629-b1f7-07bf68f6b27e.jpg?raw=true" alt="Car 1">
-            </div>
-            <div class="slide">
-                <img src="https://github.com/ruby-rue/ruby-rue.github.io/blob/main/slideshow/73328ac8-7835-4904-935e-68a8c33da135.jpg?raw=true" alt="Car 1">
-            </div>
-            <div class="slide">
-                <img src="https://github.com/ruby-rue/ruby-rue.github.io/blob/main/slideshow/b02f9046-ef81-451f-bebe-9b1e339cd865.jpg?raw=true" alt="Car 1">
-            </div>
-            <div class="slide">
-                <img src="https://github.com/ruby-rue/ruby-rue.github.io/blob/main/slideshow/bce47cdc-9e1f-43d3-9205-42caafa52c59.jpg?raw=true" alt="Car 1">
-            </div>
-            <div class="slide">
-                <img src="https://github.com/ruby-rue/ruby-rue.github.io/blob/main/slideshow/bd305111-5dd2-4097-bba8-910fe3142ab4.jpg?raw=true" alt="Car 1">
-            </div>
-            <div class="slide">
-                <img src="https://github.com/ruby-rue/ruby-rue.github.io/blob/main/slideshow/e3e96d04-bbda-4ac3-992c-9b3b87b8ba9e.jpg?raw=true" alt="Car 1">
-            </div>
-            <div class="slide">
-                <img src="https://github.com/ruby-rue/ruby-rue.github.io/blob/main/slideshow/e3f34d3a-c2df-42b0-a260-7f4940f30d33.jpg?raw=true" alt="Car 1">
-            </div>
+    </section>
 
-            <div class="dots">
-                <span class="dot active"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-            </div>
-        </div>
-
-        <div class="form-container">
-            <h2>Contact Information</h2>
-            <form id="carForm">
-                <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <h2>Our Celestial Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1464802686167-b939a6910659?w=800" alt="Milky Way">
+                <div class="overlay">
+                    <h3>The Milky Way</h3>
+                    <p>Our home galaxy in stunning detail</p>
                 </div>
-
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=800" alt="Starry Night">
+                <div class="overlay">
+                    <h3>Starry Nights</h3>
+                    <p>Countless stars illuminating the darkness</p>
                 </div>
-
-                <div class="form-group">
-                    <label for="currentcar">Current Car Model:</label>
-                    <input type="text" id="currentcar" name="currentcar" required>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?w=800" alt="Night Sky">
+                <div class="overlay">
+                    <h3>Dark Skies</h3>
+                    <p>Perfect conditions for stargazing</p>
                 </div>
-
-                <div class="form-group">
-                    <label for="dreamcar">Dream Car Model:</label>
-                    <input type="text" id="dreamcar" name="dreamcar" required>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=800" alt="Nebula">
+                <div class="overlay">
+                    <h3>Cosmic Wonders</h3>
+                    <p>Nebulae and distant galaxies</p>
                 </div>
-
-                <button type="submit">Submit</button>
-            </form>
-            <div id="successMessage" class="success-message">
-                Thank you for your submission!
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1543722530-d2c3201371e7?w=800" alt="Telescope View">
+                <div class="overlay">
+                    <h3>Through the Lens</h3>
+                    <p>Our telescope captures</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1531306728370-e2ebd9d7bb99?w=800" alt="Star Trails">
+                <div class="overlay">
+                    <h3>Star Trails</h3>
+                    <p>The earth's rotation visualized</p>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="footer">
-            <p>Contact Us:</p>
-            <p>Email: <a href="mailto:khalilben@stargazin.pro">khalilben@stargazin.pro</a></p>
-            <p>Instagram: <a href="https://www.instagram.com/stargaz.in/reels/?locale=zh_CN&hl=af" target="_blank">@stargaz.in</a></p>
-            <p>Phone: +212 697-353985</p>
+    <!-- About Us Section -->
+    <section id="about" class="about">
+        <h2>About Stargazin</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Our Mission</h3>
+                <p>At Stargazin, we believe that everyone should have the opportunity to witness the breathtaking beauty of the night sky. Our passion for astronomy drives us to share the wonders of the cosmos with stargazers of all levels.</p>
+                
+                <h3>What We Do</h3>
+                <p>We organize guided stargazing tours, provide high-quality telescope rentals, and offer educational workshops about astronomy and astrophotography. Our experienced team of astronomers and enthusiasts is dedicated to making your celestial experience unforgettable.</p>
+                
+                <h3>Our Expertise</h3>
+                <ul>
+                    <li>🔭 Professional Astronomy Guides</li>
+                    <li>📸 Astrophotography Workshops</li>
+                    <li>🌌 Dark Sky Location Tours</li>
+                    <li>🎓 Educational Programs</li>
+                    <li>🔬 Advanced Telescope Equipment</li>
+                </ul>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1532693322450-2cb5c511067d?w=800" alt="Stargazing Experience">
+            </div>
         </div>
-    </div>
+    </section>
 
-    <script>
-        // Slideshow functionality
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const dots = document.querySelectorAll('.dot');
-        
-        function showSlide(n) {
-            slides[currentSlide].classList.remove('active');
-            dots[currentSlide].classList.remove('active');
-            currentSlide = (n + slides.length) % slides.length;
-            slides[currentSlide].classList.add('active');
-            dots[currentSlide].classList.add('active');
-        }
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <div class="contact-content">
+            <p>Ready to explore the cosmos with us?</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h4>📧 Email</h4>
+                    <p>hello@stargazin.com</p>
+                </div>
+                <div class="contact-item">
+                    <h4>📞 Phone</h4>
+                    <p>+1 (555) STAR-123</p>
+                </div>
+                <div class="contact-item">
+                    <h4>📍 Location</h4>
+                    <p>Dark Sky Reserve, USA</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        document.querySelector('.next').addEventListener('click', () => showSlide(currentSlide + 1));
-        document.querySelector('.prev').addEventListener('click', () => showSlide(currentSlide - 1));
-        
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => showSlide(index));
-        });
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Stargazin. All rights reserved. | Explore the universe with us ✨</p>
+    </footer>
 
-        // Auto advance slides
-        setInterval(() => showSlide(currentSlide + 1), 5000);
-
-        // Form submission
-        document.getElementById('carForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const currentcar = document.getElementById('currentcar').value;
-            const dreamcar = document.getElementById('dreamcar').value;
-
-            try {
-                await addDoc(collection(db, "carSubmissions"), {
-                    name: name,
-                    email: email,
-                    currentcar: currentcar,
-                    dreamcar: dreamcar,
-                    timestamp: serverTimestamp()
-                });
-                console.log('Form submitted:', { name, email, currentcar, dreamcar });
-                document.getElementById('successMessage').style.display = 'block';
-                this.reset();
-                setTimeout(() => {
-                    document.getElementById('successMessage').style.display = 'none';
-                }, 3000);
-            } catch (error) {
-                console.error("Error adding document: ", error);
-            }
-        });
-
-        // Shooting stars
-        function createStar() {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.style.left = `${Math.random() * window.innerWidth}px`;
-            star.style.top = `${Math.random() * window.innerHeight}px`;
-            document.getElementById('shooting-stars').appendChild(star);
-            setTimeout(() => star.remove(), 2000);
-        }
-
-        function createStarsRandomly() {
-            const numberOfStars = Math.floor(Math.random() * 3) + 1;
-            for (let i = 0; i < numberOfStars; i++) {
-                createStar();
-            }
-            setTimeout(createStarsRandomly, Math.random() * 200 + 100);
-        }
-
-        createStarsRandomly();
-    </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
