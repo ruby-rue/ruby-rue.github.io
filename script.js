@@ -12,10 +12,22 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// Banner close functionality
+const bannerClose = document.querySelector('.banner-close');
+const topBanner = document.querySelector('.top-banner');
+const nav = document.querySelector('nav');
+
+if (bannerClose) {
+    bannerClose.addEventListener('click', () => {
+        topBanner.style.display = 'none';
+        nav.style.top = '0';
+    });
+}
+
 // Add fade-in animation on scroll
 const observerOptions = {
     threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
+    rootMargin: '0px 0px -50px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -27,22 +39,33 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe gallery items
-document.querySelectorAll('.gallery-item').forEach(item => {
+// Observe gallery items and cards
+document.querySelectorAll('.gallery-item, .about-card, .experience-card').forEach(item => {
     item.style.opacity = '0';
     item.style.transform = 'translateY(30px)';
-    item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    item.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
     observer.observe(item);
 });
 
 // Add active state to navigation on scroll
+let lastScrollTop = 0;
 window.addEventListener('scroll', () => {
     const sections = document.querySelectorAll('section[id]');
     const scrollY = window.pageYOffset;
+    const st = window.pageYOffset || document.documentElement.scrollTop;
 
+    // Hide/show nav on scroll
+    if (st > lastScrollTop && st > 200) {
+        nav.style.transform = 'translateY(-100%)';
+    } else {
+        nav.style.transform = 'translateY(0)';
+    }
+    lastScrollTop = st <= 0 ? 0 : st;
+
+    // Active section highlighting
     sections.forEach(section => {
         const sectionHeight = section.offsetHeight;
-        const sectionTop = section.offsetTop - 100;
+        const sectionTop = section.offsetTop - 150;
         const sectionId = section.getAttribute('id');
         const navLink = document.querySelector(`nav ul li a[href="#${sectionId}"]`);
 
@@ -53,5 +76,15 @@ window.addEventListener('scroll', () => {
         }
     });
 });
+
+// Form submission handler
+const contactForm = document.querySelector('.contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Thank you for your interest! We will contact you soon.');
+        contactForm.reset();
+    });
+}
 
 console.log('✨ Stargazin website loaded successfully!');

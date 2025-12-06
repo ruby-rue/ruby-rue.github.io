@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stargazin - Explore the Night Sky</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Animated starry background -->
@@ -12,126 +15,216 @@
     <div class="stars2"></div>
     <div class="stars3"></div>
 
+    <!-- Banner -->
+    <div class="top-banner">
+        <p>Book your stargazing experience today. Limited spots available. <span class="banner-close">×</span></p>
+    </div>
+
     <!-- Navigation -->
     <nav>
-        <div class="logo">✨ Stargazin</div>
+        <div class="logo">STARGAZIN</div>
         <ul>
             <li><a href="#home">Home</a></li>
+            <li><a href="#experiences">Experiences</a></li>
             <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#about">About</a></li>
         </ul>
+        <a href="#contact" class="reserve-btn">RESERVE</a>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Welcome to Stargazin</h1>
-            <p>Discover the beauty of the cosmos</p>
-            <a href="#gallery" class="cta-button">Explore Our Gallery</a>
+            <h1>THE COSMOS AWAITS.<br><span class="hero-subtitle">EVERY NIGHT IS DIFFERENT.</span></h1>
+            <a href="#experiences" class="cta-button">EXPLORE EXPERIENCES</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1200" alt="Starry Night Sky">
+        </div>
+    </section>
+
+    <!-- Experiences Section -->
+    <section id="experiences" class="experiences">
+        <div class="experience-card">
+            <div class="experience-content">
+                <h2>DEEP SKY<br>OBSERVATORY</h2>
+                <p>Join our expert astronomers for an unforgettable journey through the cosmos. Using our state-of-the-art telescopes, observe distant galaxies, nebulae, and star clusters.</p>
+                <a href="#contact" class="learn-more">LEARN MORE →</a>
+            </div>
+            <div class="experience-image">
+                <img src="https://images.unsplash.com/photo-1543722530-d2c3201371e7?w=800" alt="Telescope">
+            </div>
+        </div>
+        
+        <div class="experience-card reverse">
+            <div class="experience-content">
+                <h2>ASTROPHOTOGRAPHY<br>WORKSHOP</h2>
+                <p>Master the art of capturing the night sky. Learn professional techniques for photographing stars, planets, and the Milky Way with hands-on guidance.</p>
+                <a href="#contact" class="learn-more">LEARN MORE →</a>
+            </div>
+            <div class="experience-image">
+                <img src="https://images.unsplash.com/photo-1464802686167-b939a6910659?w=800" alt="Milky Way Photography">
+            </div>
         </div>
     </section>
 
     <!-- Gallery Section -->
     <section id="gallery" class="gallery">
-        <h2>Our Celestial Gallery</h2>
+        <div class="section-header">
+            <h2>CAPTURED MOMENTS</h2>
+            <p>A collection of our most breathtaking celestial observations</p>
+        </div>
         <div class="gallery-grid">
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1464802686167-b939a6910659?w=800" alt="Milky Way">
-                <div class="overlay">
-                    <h3>The Milky Way</h3>
+            <div class="gallery-item large">
+                <img src="https://images.unsplash.com/photo-1464802686167-b939a6910659?w=1200" alt="Milky Way">
+                <div class="gallery-overlay">
+                    <h3>THE MILKY WAY</h3>
                     <p>Our home galaxy in stunning detail</p>
                 </div>
             </div>
             <div class="gallery-item">
                 <img src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=800" alt="Starry Night">
-                <div class="overlay">
-                    <h3>Starry Nights</h3>
-                    <p>Countless stars illuminating the darkness</p>
+                <div class="gallery-overlay">
+                    <h3>STARRY NIGHTS</h3>
+                    <p>Infinite stars above</p>
                 </div>
             </div>
             <div class="gallery-item">
                 <img src="https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?w=800" alt="Night Sky">
-                <div class="overlay">
-                    <h3>Dark Skies</h3>
-                    <p>Perfect conditions for stargazing</p>
+                <div class="gallery-overlay">
+                    <h3>DARK SKIES</h3>
+                    <p>Perfect conditions</p>
                 </div>
             </div>
             <div class="gallery-item">
                 <img src="https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=800" alt="Nebula">
-                <div class="overlay">
-                    <h3>Cosmic Wonders</h3>
-                    <p>Nebulae and distant galaxies</p>
+                <div class="gallery-overlay">
+                    <h3>COSMIC WONDERS</h3>
+                    <p>Distant nebulae</p>
                 </div>
             </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1543722530-d2c3201371e7?w=800" alt="Telescope View">
-                <div class="overlay">
-                    <h3>Through the Lens</h3>
-                    <p>Our telescope captures</p>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1531306728370-e2ebd9d7bb99?w=800" alt="Star Trails">
-                <div class="overlay">
-                    <h3>Star Trails</h3>
-                    <p>The earth's rotation visualized</p>
+            <div class="gallery-item wide">
+                <img src="https://images.unsplash.com/photo-1531306728370-e2ebd9d7bb99?w=1200" alt="Star Trails">
+                <div class="gallery-overlay">
+                    <h3>STAR TRAILS</h3>
+                    <p>Earth's rotation visualized</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Us Section -->
+    <!-- About Section -->
     <section id="about" class="about">
-        <h2>About Stargazin</h2>
-        <div class="about-content">
-            <div class="about-text">
-                <h3>Our Mission</h3>
-                <p>At Stargazin, we believe that everyone should have the opportunity to witness the breathtaking beauty of the night sky. Our passion for astronomy drives us to share the wonders of the cosmos with stargazers of all levels.</p>
-                
-                <h3>What We Do</h3>
-                <p>We organize guided stargazing tours, provide high-quality telescope rentals, and offer educational workshops about astronomy and astrophotography. Our experienced team of astronomers and enthusiasts is dedicated to making your celestial experience unforgettable.</p>
-                
-                <h3>Our Expertise</h3>
-                <ul>
-                    <li>🔭 Professional Astronomy Guides</li>
-                    <li>📸 Astrophotography Workshops</li>
-                    <li>🌌 Dark Sky Location Tours</li>
-                    <li>🎓 Educational Programs</li>
-                    <li>🔬 Advanced Telescope Equipment</li>
-                </ul>
+        <div class="about-grid">
+            <div class="about-main">
+                <h2>ABOUT STARGAZIN</h2>
+                <p class="about-intro">We're not just about looking at stars. We're about experiencing the universe in a way that changes how you see everything.</p>
             </div>
-            <div class="about-image">
-                <img src="https://images.unsplash.com/photo-1532693322450-2cb5c511067d?w=800" alt="Stargazing Experience">
+            
+            <div class="about-stats">
+                <div class="stat-item">
+                    <h3>10+</h3>
+                    <p>Years of Experience</p>
+                </div>
+                <div class="stat-item">
+                    <h3>5000+</h3>
+                    <p>Happy Stargazers</p>
+                </div>
+                <div class="stat-item">
+                    <h3>50+</h3>
+                    <p>Dark Sky Locations</p>
+                </div>
+            </div>
+            
+            <div class="about-content-grid">
+                <div class="about-card">
+                    <div class="icon">🔭</div>
+                    <h3>Professional Equipment</h3>
+                    <p>State-of-the-art telescopes and imaging technology for the best celestial views</p>
+                </div>
+                
+                <div class="about-card">
+                    <div class="icon">🌌</div>
+                    <h3>Expert Guides</h3>
+                    <p>Certified astronomers with years of experience and passion for the cosmos</p>
+                </div>
+                
+                <div class="about-card">
+                    <div class="icon">📸</div>
+                    <h3>Photography Training</h3>
+                    <p>Learn to capture stunning astrophotography with professional instruction</p>
+                </div>
+                
+                <div class="about-card">
+                    <div class="icon">🎓</div>
+                    <h3>Educational Programs</h3>
+                    <p>Workshops and courses for all skill levels, from beginners to advanced</p>
+                </div>
+            </div>
+            
+            <div class="about-image-full">
+                <img src="https://images.unsplash.com/photo-1532693322450-2cb5c511067d?w=1400" alt="Stargazing Experience">
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
-        <h2>Contact Us</h2>
-        <div class="contact-content">
-            <p>Ready to explore the cosmos with us?</p>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <h4>📧 Email</h4>
-                    <p>hello@stargazin.com</p>
+        <div class="contact-container">
+            <div class="contact-left">
+                <h2>READY TO EXPLORE?</h2>
+                <p class="contact-subtitle">Book your stargazing experience today</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="contact-label">EMAIL</span>
+                        <a href="mailto:hello@stargazin.com">hello@stargazin.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">PHONE</span>
+                        <a href="tel:+15555551234">+1 (555) 555-1234</a>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">LOCATION</span>
+                        <p>Dark Sky Reserve, USA</p>
+                    </div>
                 </div>
-                <div class="contact-item">
-                    <h4>📞 Phone</h4>
-                    <p>+1 (555) STAR-123</p>
-                </div>
-                <div class="contact-item">
-                    <h4>📍 Location</h4>
-                    <p>Dark Sky Reserve, USA</p>
-                </div>
+            </div>
+            
+            <div class="contact-right">
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <input type="tel" placeholder="Phone Number">
+                    <select required>
+                        <option value="">Select Experience</option>
+                        <option value="observatory">Deep Sky Observatory</option>
+                        <option value="photography">Astrophotography Workshop</option>
+                        <option value="tour">Stargazing Tour</option>
+                        <option value="custom">Custom Experience</option>
+                    </select>
+                    <textarea placeholder="Your Message" rows="4"></textarea>
+                    <button type="submit" class="submit-btn">SEND MESSAGE</button>
+                </form>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Stargazin. All rights reserved. | Explore the universe with us ✨</p>
+        <div class="footer-content">
+            <div class="footer-left">
+                <div class="footer-logo">STARGAZIN</div>
+                <p>&copy; 2024 Stargazin. All rights reserved.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#experiences">Experiences</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
     </footer>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
